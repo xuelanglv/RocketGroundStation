@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/signal"/>
+    <qresource prefix="/">
+        <file>greenSignal.png</file>
+    </qresource>
+</RCC>

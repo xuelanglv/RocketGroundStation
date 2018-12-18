@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/background_image.png</file>
+        <file>Resources/button_active.png</file>
+        <file>Resources/button_inactive.png</file>
+        <file>Resources/help.png</file>
+        <file>Resources/launch_flag.png</file>
+        <file>Resources/launch_log.png</file>
+        <file>Resources/LOGO.png</file>
+        <file>Resources/tool.png</file>
+        <file>Resources/distance_title.png</file>
+        <file>Resources/show_frame.png</file>
+        <file>Resources/火箭.png</file>
+    </qresource>
+</RCC>
