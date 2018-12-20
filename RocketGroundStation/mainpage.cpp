@@ -200,7 +200,7 @@ void MainPage::trackerInit()
 {
     bool HOG = false;
     bool FIXEDWINDOW = true;
-    bool MULTISCALE = false;
+    bool MULTISCALE = true;
     //bool SILENT = true;
     bool LAB = true;
     tracker = KCFTracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
