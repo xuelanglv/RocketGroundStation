@@ -170,13 +170,24 @@ void KCFTracker::init(const cv::Rect &roi, cv::Mat image)
 // Update position based on the new frame
 cv::Rect KCFTracker::update(cv::Mat image)
 {
+     //跟踪框中心
+    float cx = _roi.x + _roi.width / 2.0f;
+    float cy = _roi.y + _roi.height / 2.0f;
+    //float _cx= _roi.x+ _roi.width;  //跟踪框水平边界
+    //float _cy= _roi.y+ _roi.height;   //跟踪框垂直边界
+    //界面尺寸是（640，480）
+    //float MP_X=640;
+    //float MP_Y=480;
+    //if(_cx==_roi.width||_cx==MP_X||_cy==_roi.height||_cy==MP_Y) //当检测框靠近界面边界不更新位置
+    //return _roi;
+    
     if (_roi.x + _roi.width <= 0) _roi.x = -_roi.width + 1;
     if (_roi.y + _roi.height <= 0) _roi.y = -_roi.height + 1;
     if (_roi.x >= image.cols - 1) _roi.x = image.cols - 2;
     if (_roi.y >= image.rows - 1) _roi.y = image.rows - 2;
 
-    float cx = _roi.x + _roi.width / 2.0f;
-    float cy = _roi.y + _roi.height / 2.0f;
+    //float cx = _roi.x + _roi.width / 2.0f;
+    //float cy = _roi.y + _roi.height / 2.0f;
 
 
     float peak_value;
@@ -228,7 +239,15 @@ cv::Rect KCFTracker::update(cv::Mat image)
 cv::Point2f KCFTracker::detect(cv::Mat z, cv::Mat x, float &peak_value)
 {
     using namespace FFTTools;
-
+    float cx = _roi.x + _roi.width / 2.0f;
+    float cy = _roi.y + _roi.height / 2.0f;
+    //float _cx= _roi.x+ _roi.width;  //跟踪框水平边界
+    //float _cy= _roi.y+ _roi.height;   //跟踪框垂直边界
+    //界面尺寸是（640，480）
+    float MP_X=640;
+    float MP_Y=480;
+    if(cx==_roi.width||cx==MP_X||cy==_roi.height||cy==MP_Y) //当检测框靠近界面边界不更新位置
+        x=z;
     cv::Mat k = gaussianCorrelation(x, z);
     cv::Mat res = (real(fftd(complexMultiplication(_alphaf, fftd(k)), true)));
 
